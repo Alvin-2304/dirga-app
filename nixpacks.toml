@@ -1,2 +1,8 @@
-[build]
-aptPkgs = ["php8.2", "php8.2-mysql", "php8.2-curl", "php8.2-mbstring", "php8.2-xml", "composer"]
+[phases.setup]
+nixPkgs = ["php82", "php82Packages.composer"]
+
+[phases.build]
+cmds = ["composer install --no-dev --optimize-autoloader"]
+
+[phases.start]
+cmd = "php artisan serve --host=0.0.0.0 --port=$PORT"
